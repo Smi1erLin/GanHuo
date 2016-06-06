@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="echohce.cn.gank.view.activity.GanHuoActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:layout_alignParentTop="true"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Title" />
+
+
+    <FrameLayout
+       android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/loading_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            app:indicator="LineScale"
+            app:indicator_color="@color/colorAccent">
+
+        </com.wang.avi.AVLoadingIndicatorView>
+    </FrameLayout>
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_below="@id/toolbar"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </WebView>
+
+</RelativeLayout>
