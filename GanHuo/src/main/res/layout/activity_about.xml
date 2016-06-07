@@ -124,7 +124,7 @@
                 <TextView
                     android:padding="8dp"
                     android:textSize="14sp"
-                    android:text="使用到的依赖库\nReactiveX / RxJava\nsquare / Retrofit\nbumptech / Glide\nJude95 / EasyRecyclerView\nhdodenhof / circleimageview\njaeger / statusbaruitl"
+                    android:text="使用到的依赖库\nReactiveX / RxJava\nsquare / Retrofit\nbumptech / Glide\nJude95 / EasyRecyclerView\nhdodenhof / circleimageview\njaeger / statusbaruitl\nchrisbanes / photoview"
                     android:textColor="#494949"
                     android:lineSpacingExtra="6dp"
                     android:ellipsize="end"

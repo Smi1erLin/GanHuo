@@ -46,7 +46,4 @@ dependencies {
     compile 'com.jude:easyrecyclerview:3.5.8'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
 
-    // https://github.com/81813780/AVLoadingIndicatorView
-    compile 'com.wang.avi:library:1.0.5'
-    compile 'com.nineoldandroids:library:2.4.0'
 }

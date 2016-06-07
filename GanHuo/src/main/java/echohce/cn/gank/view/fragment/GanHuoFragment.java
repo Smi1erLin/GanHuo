@@ -16,7 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -143,8 +145,6 @@ public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter
                 if (title.equals("福利")) startOtherActivity(adapter, position, FuliActivity.class);
                 else startOtherActivity(adapter, position, GanHuoActivity.class);
             }
-
-
         });
     }
 

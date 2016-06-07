@@ -44,6 +44,7 @@ public class FuliActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         toolbar.setTitle(desc);
 
         mAttacher = new PhotoViewAttacher(fuliImage);

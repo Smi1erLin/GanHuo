@@ -1,5 +1,7 @@
 package echohce.cn.gank.util;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -34,5 +36,13 @@ public class Util {
             e.printStackTrace();
         }
         return "滴滴答";
+    }
+
+    public static void shareText(Context context, String text)
+    {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain"); // 纯文本
+        intent.putExtra(Intent.EXTRA_TEXT,text);
+        context.startActivity(Intent.createChooser(intent,"干货集中营"));
     }
 }
