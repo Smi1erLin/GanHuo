@@ -16,8 +16,6 @@ gank.io是一个致力于为广大开发者分享最新，最潮和实用干货�
 
 ## 依赖项
 ```
-// 圆形 ImageView
-compile 'de.hdodenhof:circleimageview:2.0.0'
 compile 'com.android.support:appcompat-v7:23.3.0'
 compile 'com.android.support:cardview-v7:23.3.0'
 compile 'com.android.support:design:23.3.0'
