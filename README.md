@@ -7,6 +7,8 @@ gank.io是一个致力于为广大开发者分享最新，最潮和实用干货�
 介绍本应用的简书地址：
 [Android开源项目学习：GankGirl - Retrofit+RxJava+Material Design](http://www.jianshu.com/p/f358d8ce3185)
 
+[fir.im下载地址](http://fir.im/8afc)
+
 图标：
 
 ![icon](screenshot/img_launcher.jpg)
