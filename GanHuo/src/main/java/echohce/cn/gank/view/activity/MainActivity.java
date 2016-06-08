@@ -3,6 +3,7 @@ package echohce.cn.gank.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -75,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (String title : titles) {
             fragments.add(GanHuoFragment.getInstance(title));
         }
-        // TODO: 2016/6/6
 
         viewPager.setOffscreenPageLimit(4);
         viewPager.setAdapter(adapter);
@@ -106,6 +106,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.action_about:
                 startActivity(new Intent(MainActivity.this, AboutActivity.class));
                 overridePendingTransition(0, 0);
+                break;
+            case R.id.action_change:
+                Snackbar.make(fab,"TODO: 2016/6/8",Snackbar.LENGTH_SHORT).show();
                 break;
             default:
                 break;

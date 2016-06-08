@@ -17,6 +17,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import echohce.cn.gank.R;
+import echohce.cn.gank.util.Util;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class FuliActivity extends AppCompatActivity {
@@ -26,8 +27,12 @@ public class FuliActivity extends AppCompatActivity {
     @Bind(R.id.fuli_image)
     ImageView fuliImage;
 
+    String desc;
+    String url;
+
     private PhotoViewAttacher mAttacher;
     private Bitmap mBitmap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +44,8 @@ public class FuliActivity extends AppCompatActivity {
 
     private void init() {
         Intent intent = getIntent();
-        String desc = intent.getStringExtra("desc");
-        String url = intent.getStringExtra("url");
+        desc = intent.getStringExtra("desc");
+        url = intent.getStringExtra("url");
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -64,16 +69,20 @@ public class FuliActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_fuli,menu);
+        getMenuInflater().inflate(R.menu.menu_fuli, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())
-        {
-            case R.id.action_save:break;
-            case R.id.action_share:break;
+        switch (item.getItemId()) {
+            case R.id.action_save:
+                Util.saveImage(this, desc, mBitmap, fuliImage, true);
+                break;
+            case R.id.action_share:
+                Util.shareImage(this, Util.saveImage(this, desc, mBitmap, fuliImage, false));
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

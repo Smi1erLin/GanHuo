@@ -16,6 +16,10 @@ public class GankSingleTon {
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
     private static GankService gankService;
 
+    /**
+     * 获取GankService单例
+     * @return
+     */
     public static GankService getGankService() {
         if (gankService == null) {
             synchronized (GankSingleTon.class) {

@@ -26,8 +26,6 @@ public abstract class HidingScrollListener extends RecyclerView.OnScrollListener
             scrolledDistance += dy;
         }
     }
-
     public abstract void onShow();
-
     public abstract void onHide();
 }

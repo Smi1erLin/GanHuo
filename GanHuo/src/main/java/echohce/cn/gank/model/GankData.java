@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by lin on 2016/6/2.
  */
-// POJO
+
 // 使用AS的朋友推荐使用GsonFormat这个插件。
 public class GankData {
 

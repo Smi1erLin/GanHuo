@@ -132,6 +132,32 @@
                     android:layout_height="match_parent" />
 
             </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/cardview_margin"
+                android:layout_marginRight="@dimen/cardview_margin"
+                android:layout_marginTop="@dimen/cardview_margin"
+                android:background="#FFFFFF"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:cardCornerRadius="@dimen/cardview_corner_radius"
+                app:cardElevation="@dimen/cardview_elevation">
+                <TextView
+                    android:padding="8dp"
+                    android:textSize="14sp"
+                    android:text="图片来源: \n图标：https://dribbble.com/shots/2209211-Material-Design-Harry\n欢迎页: http://gank.io/post/\n其它: Material Design官方icon"
+                    android:textColor="#494949"
+                    android:lineSpacingExtra="6dp"
+
+                    android:ellipsize="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+            </android.support.v7.widget.CardView>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

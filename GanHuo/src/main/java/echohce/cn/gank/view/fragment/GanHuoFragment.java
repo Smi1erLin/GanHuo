@@ -16,9 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
@@ -42,19 +40,29 @@ import rx.schedulers.Schedulers;
  * Created by lin on 2016/6/5.
  */
 public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
-    List<GankData.Result> ganHuoList;
 
     @Bind(R.id.recyclerview)
     EasyRecyclerView recyclerView;
 
-    private String title;
+    // fab控件
     private FloatingActionButton fab;
-    private static final int DEAFULT_LOAD_COUNT = 20;
-    private int currentPage = 1;
-    private Handler handler = new Handler();
 
+    List<GankData.Result> ganHuoList;
     private FuliAdapter fuLiAdapter;
     private GanHuoAdapter ganHuoAdapter;
+
+    // Title : [福利|ANDROID|IOS|休息视频]
+    private String title;
+
+    // 常量：每次加载的数量
+    private static final int DEAFULT_LOAD_COUNT = 20;
+
+    // 记录当前页数。
+    private int currentPage = 1;
+
+    private Handler handler = new Handler();
+
+    // RxJava Observer对象。
     private Observer<GankData> observer = new Observer<GankData>() {
         @Override
         public void onCompleted() {
@@ -64,7 +72,7 @@ public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter
         @Override
         public void onError(Throwable e) {
             Log.e("Observer_State", "onError");
-            Snackbar.make(recyclerView, "NO NETWORK", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(recyclerView, "NO NETWORK", Snackbar.LENGTH_SHORT).show();
         }
 
         @Override
@@ -79,6 +87,14 @@ public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter
         }
     };
 
+    private void getGanHuo(String type, int count, int page) {
+        subscription = GankSingleTon.getGankService()
+                .getGankData(type, count, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,17 +107,21 @@ public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_fragment, container, false);
         ButterKnife.bind(this, view);
+        // 初始化操作
         init(view);
         return view;
     }
 
     private void init(View view) {
 
+        // 获取Activity的Fab对象
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        // recyclerView = (EasyRecyclerView) view.findViewById(R.id.recyclerview);
 
+        // 根据title判断对应的布局，和设置适配器的样式
         if (title.equals("福利")) {
-            StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            // 瀑布流
+            StaggeredGridLayoutManager staggeredGridLayoutManager
+                    = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(staggeredGridLayoutManager);
             fuLiAdapter = new FuliAdapter(getContext());
             dealWithAdapter(fuLiAdapter);
@@ -110,6 +130,8 @@ public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter
             ganHuoAdapter = new GanHuoAdapter(getContext());
             dealWithAdapter(ganHuoAdapter);
         }
+
+        // 设置Scroll监听器
         recyclerView.setOnScrollListener(new HidingScrollListener() {
             @Override
             public void onShow() {
@@ -121,6 +143,9 @@ public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter
                 hideViews();
             }
         });
+        // 设置Refresh监听器
+        recyclerView.setRefreshListener(this);
+        // 刷新界面
         onRefresh();
     }
 
@@ -134,6 +159,7 @@ public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter
         fab.animate().translationY(0).setInterpolator(new LinearInterpolator()).start();
     }
 
+    // EasyRecyclerView 简单的设置
     private void dealWithAdapter(final RecyclerArrayAdapter adapter) {
         recyclerView.setAdapterWithProgress(adapter);
         adapter.setMore(R.layout.layout_load_more, this);
@@ -156,7 +182,11 @@ public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter
         startActivity(intent);
     }
 
-    // 处理 LoadMore 逻辑，需要实现 RecyclerArrayAdapter.OnLoadMoreListener 接口
+    /**
+     * 上拉更多功能
+     * 处理 LoadMore 逻辑，需要实现 RecyclerArrayAdapter.OnLoadMoreListener 接口
+     * 具体实现是请求下一页的数据。
+     */
     @Override
     public void onLoadMore() {
         handler.postDelayed(new Runnable() {
@@ -176,13 +206,6 @@ public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter
         }, 1000);
     }
 
-    private void getGanHuo(String type, int count, int page) {
-        subscription = GankSingleTon.getGankService()
-                .getGankData(type, count, page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-    }
 
     @Override
     public void onRefresh() {
@@ -207,12 +230,12 @@ public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter
         }, 1000);
     }
 
+    // 返回一个带title的Fragment实例
     public static Fragment getInstance(String title) {
         GanHuoFragment fragment = new GanHuoFragment();
         Bundle bundle = new Bundle();
         bundle.putString("title", title);
         fragment.setArguments(bundle);
-
         return fragment;
     }
 
@@ -222,6 +245,9 @@ public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter
         ButterKnife.unbind(this);
     }
 
+    /**
+     *  滑动到顶端，没有动画，很僵硬
+     */
     public void scrollToTop() {
         recyclerView.scrollToPosition(0);
     }

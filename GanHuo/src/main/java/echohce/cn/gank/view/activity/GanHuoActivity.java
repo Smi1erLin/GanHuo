@@ -124,6 +124,9 @@ public class GanHuoActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Back按钮逻辑判断
+     */
     @Override
     public void onBackPressed() {
         if (webView.canGoBack()) {

@@ -1,13 +1,11 @@
 package echohce.cn.gank.view.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
-
-import com.jaeger.library.StatusBarUtil;
 
 import echohce.cn.gank.R;
 
@@ -33,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 SplashActivity.this.finish();
             }
-        }, 1500);
+        }, 1500); // 1500ms后进行跳转
     }
 
     @Override

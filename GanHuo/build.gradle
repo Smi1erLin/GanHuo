@@ -43,7 +43,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     // EasyRecyclerView
     // 使用教程：https://github.com/Jude95/EasyRecyclerView/blob/master/README_ch.md
-    compile 'com.jude:easyrecyclerview:3.5.8'
+    compile 'com.jude:easyrecyclerview:3.5.7'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
 
 }
