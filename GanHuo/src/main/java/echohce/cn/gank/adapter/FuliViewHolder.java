@@ -14,7 +14,7 @@ import echohce.cn.gank.model.GankData;
  * Created by lin on 2016/6/5.
  */
 public class FuliViewHolder extends BaseViewHolder<GankData.Result> {
-    private ImageView mImageView;
+    public ImageView mImageView;
 
     public FuliViewHolder(ViewGroup parent) {
         super(parent, R.layout.item_fuli);

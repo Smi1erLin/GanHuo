@@ -1,4 +1,4 @@
-package echohce.cn.gank;
+package echohce.cn.gank.listener;
 
 import android.support.v7.widget.RecyclerView;
 

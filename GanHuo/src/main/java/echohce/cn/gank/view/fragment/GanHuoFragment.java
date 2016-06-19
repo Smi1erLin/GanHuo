@@ -24,7 +24,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import echohce.cn.gank.HidingScrollListener;
+import echohce.cn.gank.listener.HidingScrollListener;
 import echohce.cn.gank.R;
 import echohce.cn.gank.adapter.FuliAdapter;
 import echohce.cn.gank.adapter.GanHuoAdapter;
@@ -179,7 +179,8 @@ public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter
         Intent intent = new Intent(getContext(), cls);
         intent.putExtra("desc", adapter.getItem(position).getDesc());
         intent.putExtra("url", adapter.getItem(position).getUrl());
-        startActivity(intent);
+        getActivity().startActivity(intent);
+        getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     /**
@@ -246,7 +247,7 @@ public class GanHuoFragment extends BaseFragment implements RecyclerArrayAdapter
     }
 
     /**
-     *  滑动到顶端，没有动画，很僵硬
+     * 滑动到顶端，没有动画，很僵硬
      */
     public void scrollToTop() {
         recyclerView.scrollToPosition(0);
